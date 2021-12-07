@@ -27,6 +27,14 @@ body{
     background-color: rgb(235, 184, 117);
     padding: 10px;
 }
+/* .input_form{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+.form_group{
+    padding: 10px;
+} */
 
 input[type=checkbox] {
     position: relative;
@@ -78,12 +86,12 @@ input[type=checkbox] {
 }
 
 h2{
-    color: black;
+    color: whitesmoke;
     font-size: 24px;
 }
 
 #add_btn{
-    background-color:rgb(235, 184, 117);
+    background-color:rgb(76, 138, 62);
 }
 
 input[type=text]{
@@ -97,6 +105,8 @@ input[type=text]{
     border-right: none;
     border-bottom: 1px solid black;
 }
+
+
 
 /* .btn{
     margin-top: 20px;
