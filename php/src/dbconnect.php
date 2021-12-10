@@ -1,7 +1,4 @@
 <?php
-//These are the defined authentication environment in the db service
-
-// The MySQL service named in the docker-compose.yml.
 $host = 'db';
 
 // Database use name
