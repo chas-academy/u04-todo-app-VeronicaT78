@@ -3,7 +3,7 @@
     include('dbconnect.php');
 
 ?>
-include('dbconnect.php');
+
 
     
     <div class="grid_container">
@@ -29,7 +29,30 @@ include('dbconnect.php');
             </div>
         </form>
     </div>
-    
+<?php if (isset($_SESSION['message'])): ?>
+	<div class="msg">
+		<?php 
+			echo $_SESSION['message']; 
+			unset($_SESSION['message']);
+		?>
+	</div>
+<?php endif ?>
+
+<?php
+    $task = "";
+	$type = "";
+
+    $sql = "INSERT INTO todolist (task, type) VALUES ('$task', '$type')";
+
+	if (isset($_POST['save'])) {
+		$task = $_POST['task'];
+		$type = $_POST['type'];
+
+		mysqli_query($conn, $sql); 
+		$_SESSION['message'] = "Task saved"; 
+		header('location: index.php');
+	}
+?>
 
     <!-- <div class="grid_container">
         <div>
