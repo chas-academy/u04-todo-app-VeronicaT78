@@ -1,0 +1,7 @@
+CREATE TABLE `todolist` (
+  `id` int(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `tasktitle` varchar(255) DEFAULT NULL,
+  `taskdesc` varchar(255) DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
+  `created_at` datetime NOT NULL
+);

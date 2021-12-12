@@ -18,10 +18,10 @@ services:
     image: mysql
     restart: always
     environment:
-        MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-        MYSQL_DATABASE: MY_DATABASE
-        MYSQL_USER: MYSQL_USER
-        MYSQL_PASSWORD: MYSQL_PASSWORD
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
     ports:
         - "9906:3306"
 

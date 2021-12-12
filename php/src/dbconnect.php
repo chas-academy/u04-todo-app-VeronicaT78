@@ -1,17 +1,20 @@
 <?php
 $host = 'db';
+$db   = 'db';
+$user = 'user';
+$pass = 'password';
+$charset = 'utf8mb4';
 
-// Database use name
-$user = 'MYSQL_USER';
-
-//database user password
-$pass = 'MYSQL_PASSWORD';
-
-// check the MySQL connection status
-$conn = new mysqli($host, $user, $pass);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-    echo "Connected to MySQL server successfully!";
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+try {
+     $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-?>
+	
+?>  
