@@ -100,6 +100,63 @@
 </body>
 </html>
 
+// <table>
+// 	<thead>
+// 		<tr>
+// 			<th>Name</th>
+// 			<th>Address</th>
+// 			<th colspan="3">Action</th>
+// 		</tr>
+// 	</thead>
+	
+// <?php while ($row = mysqli_fetch_array($results)) { ?>
+// 		<tr>
+// 			<td><?php echo $row['tasktitle']; ?></td>
+// 			<td><?php echo $row['type']; ?></td>
+//             <td><?php echo $row['taskdesc']; ?></td>
+// 		</tr>
+// 	<?php } ?>
+// </table>
 
+<table>
+	<thead>
+		<tr>
+			<th>Task</th>
+			<th>Type</th>
+			<th>Description</th>
+            <th colspan="2"></th>
+		</tr>
+	</thead>
+	
+	<?php while ($row = mysqli_fetch_array($results)) { ?>
+		<tr>
+			<td><?php echo $row['name']; ?></td>
+			<td><?php echo $row['address']; ?></td>
+			<td>
+				<a href="index.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
+			</td>
+			<td>
+				<a href="server.php?del=<?php echo $row['id']; ?>" class="del_btn">Delete</a>
+			</td>
+		</tr>
+	<?php } ?>
+</table>
+
+	<tbody>
+		<?php 
+		// select all tasks if page is visited or refreshed
+		$tasks = mysqli_query($db, "SELECT * FROM tasks");
+
+		$i = 1; while ($row = mysqli_fetch_array($tasks)) { ?>
+			<tr>
+				<td> <?php echo $i; ?> </td>
+				<td class="task"> <?php echo $row['task']; ?> </td>
+				<td class="delete"> 
+					<a href="index.php?del_task=<?php echo $row['id'] ?>">x</a> 
+				</td>
+			</tr>
+		<?php $i++; } ?>	
+	</tbody>
+</table>
 
 
