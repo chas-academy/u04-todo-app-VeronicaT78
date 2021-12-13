@@ -1,4 +1,5 @@
 <?php
+
 $host = 'db';
 $db   = 'db';
 $user = 'user';
@@ -13,6 +14,7 @@ $options = [
 ];
 try {
      $pdo = new PDO($dsn, $user, $pass, $options);
+     return $pdo;
 } catch (\PDOException $e) {
      throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
