@@ -1,5 +1,11 @@
 <?php
 
+$tasktitle = "";
+$taskdesc = "";
+$type ="";
+$id = 0;
+$update = false;
+
 if (isset($_POST['submit'])) {
     require('dbconnect.php');
 
@@ -21,6 +27,8 @@ if (isset($_POST['submit'])) {
         exit();
     
 }
+
+
 
     
     
