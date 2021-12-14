@@ -1,9 +1,19 @@
 <?php 
+
+include ('./code.php');
+
 $pdo = require('./dbconnect.php');
 $query = 'SELECT * FROM todolist';
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $tasks = $stmt->fetchAll();
+
+$tasktitle = "";
+$taskdesc = "";
+$type = "";
+$done = false;
+$id = 0;
+$update = false;
 ?>
 
 <table>
@@ -12,7 +22,6 @@ $tasks = $stmt->fetchAll();
 			<th>Task</th>
 			<th>Type</th>
             <th>Description</th>
-            <th>Done</th>
 			<th colspan="2">Action</th>
 		</tr>
 	</thead>
@@ -24,17 +33,11 @@ $tasks = $stmt->fetchAll();
 			<td><?php echo $task['tasktitle']; ?></td>
 			<td><?php echo $task['type']; ?></td>
             <td><?php echo $task['taskdesc']; ?></td>
-            <td><?php if ($done == true): ?>
-                    <input type="checkbox" checked="checked" value="<?php echo $done; ?>">
-                <?php else: ?>
-                    <input type="checkbox" value="<?php echo $done; ?>">
-                <?php endif ?>
-            </td>
 			<td>
-				<a href="./code.php?edit=<?php echo $task['id']; ?>" class="edit_btn" >Edit</a>
+				<a href="addtask.php?edit=<?php echo $task['id']; ?>" class="edit_btn" >Edit</a>
 			</td>
 			<td>
-				<a href="./deletetask.php?del=<?php echo $task['id']; ?>" class="del_btn">Delete</a>
+				<a href="deletetask.php?del=<?php echo $task['id']; ?>" class="del_btn">Delete</a>
 			</td>
 		</tr>
 	<?php 
