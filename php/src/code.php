@@ -14,9 +14,7 @@ if (isset($_POST['submit'])) {
     $tasktitle = $_POST['tasktitle'];
     $taskdesc = $_POST['taskdesc'];
     $type = $_POST['type'];
-    //$done = $_POST['done'];
-
-
+  
         $sql = "INSERT INTO todolist (tasktitle, taskdesc, type) VALUES ( :tasktitle, :taskdesc, :type)";
         $stmt= $pdo->prepare($sql);
         $stmt->execute(['tasktitle' =>$tasktitle, 'taskdesc'=>$taskdesc, 'type'=>$type]);
