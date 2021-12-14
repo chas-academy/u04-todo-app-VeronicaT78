@@ -75,10 +75,18 @@ tr:hover {
     border-radius: 5px;
 }
 
-.edit_btn {
+.done_btn {
   text-decoration: none;
   padding: 2px 5px;
   background: #2E8B57;
+  color: white;
+  border-radius: 3px;
+}
+
+.edit_btn {
+  text-decoration: none;
+  padding: 2px 5px;
+  background: #d6970d;
   color: white;
   border-radius: 3px;
 }
