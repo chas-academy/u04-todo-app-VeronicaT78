@@ -2,7 +2,7 @@
 
 include ('./code.php');
 include ('deletetask.php');
-include ('edittask.php');
+//include ('edittask.php');
 
 $pdo = require('./dbconnect.php');
 
@@ -33,14 +33,14 @@ $update = false;
     { 
     ?>
 		<tr>
-			<td><?php echo $task['tasktitle'] || $n['tasktitle'] ; ?></td>
-			<td><?php echo $task['type'] || $n['type']; ?></td>
-            <td><?php echo $task['taskdesc'] || $n['taskdesc']; ?></td>
+			<td><?php echo $task['tasktitle']; ?></td>
+			<td><?php echo $task['type']; ?></td>
+            <td><?php echo $task['taskdesc']; ?></td>
 			<td><?php echo '<form action="" method="POST">
 			<input type="hidden" name="id" value='.$task["id"].'>
 			<input type="submit" class="done_btn" name="done" value="Done"></form>'; ?>
 			</td>
-			<td><?php echo '<form action="" method="POST">
+			<td><?php echo'<form action="" method="POST">
 			<input type="hidden" name="id" value='.$task["id"].'>
 			<input type="submit" class="edit_btn" name="edit" value="Edit"></form>'; ?>
 			</td>

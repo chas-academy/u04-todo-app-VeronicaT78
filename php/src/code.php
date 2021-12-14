@@ -25,24 +25,7 @@ if (isset($_POST['submit'])) {
     
 }
 
-if (isset($_POST['update'])) {
-	
-	require('dbconnect.php');
-    
-    $id = $_POST['id'];
-    $tasktitle = $_POST['tasktitle'];
-    $taskdesc = $_POST['taskdesc'];
-    $type = $_POST['type'];
-  
-        $sql = "UPDATE todolist SET tasktitle=$tasktitle, type=$type, taskdesc=$taskdesc WHERE id = :id";
-        $stmt= $pdo->prepare($sql);
-        $stmt->execute(['tasktitle'=>$tasktitle, 'taskdesc'=>$taskdesc, 'type'=>$type]);
-        header('location: index.php');
-        
-        $pdo = null;
-        exit();
-    
-}
+
 
 
 
