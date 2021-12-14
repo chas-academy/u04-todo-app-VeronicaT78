@@ -1,20 +1,29 @@
-<?php 
+<?php
+    $pdo = require_once 'dbconnect.php';
 
-    $pdo = require('./dbconnect.php');
-    $query = 'SELECT * FROM todolist WHERE id=$id';
-    $statement = $pdo->query($query);
-    $statement->execute();
-    $task = $statement->fetch();
+    $tasks = [
+        'tasktitle' => $tasktitle,
+        'type' => $type,
+        'taskdesc' => $taskdesc,
+        'done' => $done,
+    ];
+    
+    $sql = 'UPDATE todolist
+            SET tasktitle=:tasktitle, type=:type, taskdesc=:taskdesc, done=:done 
+            WHERE id=$id'; 
+            
+    $stmt = $pdo->prepare($sql);
+    
+    $stmt->bindParam(':id', $id['id'], PDO::PARAM_INT);
+    $stmt->bindParam(':tasktitle', $tasks['tasktitle']);
+    $stmt->bindParam(':type', $tasks['type']);
+    $stmt->bindParam(':taskdesc', $tasks['taskdesc']);
+    $stmt->bindParam(':done', $tasks['done']);
+    
+    if ($stmt->execute()) {
+        echo 'The task has been updated successfully!';
+    }
+    
 
-	if (isset($_GET['edit'])) {
-		$id = $_GET['edit'];
-		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM todolist WHERE id=$id");
 
-		if (count($record) == 1 ) {
-			$n = mysqli_fetch_array($record);
-			$name = $n['name'];
-			$address = $n['address'];
-		}
-	}
 ?>
