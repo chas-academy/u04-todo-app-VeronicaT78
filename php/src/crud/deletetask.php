@@ -1,18 +1,17 @@
 <?php
 
-if(isset($_POST['submit'])){
+if(isset($_REQUEST['delete'])){
 
     require('dbconnect.php');
     
-    $id = $_POST['id'];
+    $id = $_REQUEST['id'];
 
-        $sql = "DELETE FROM todolist WHERE id = '$id'";
-        $stmt= $pdo->prepare($sql);
-        $stmt->execute(['id' => $id]);
-        header('location: index.php');
+    $sql = "DELETE FROM todolist WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
         
-        $pdo = null;
-        exit();
+    unset($stmt);
     
 }
 
