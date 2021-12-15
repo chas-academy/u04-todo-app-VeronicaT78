@@ -25,7 +25,8 @@
                 </textarea>
         </div>
         <div class="form_group">
-            <!-- <button class="btn" type="submit" name="update" style="background: #556B2F;" >Update</button> -->
-            <button class="btn" type="submit" name="submit" >Add task</button>
+            <?php if(isset($_GET['id'])){ echo '<button class="btn" type="submit" name="update" style="background: #556B2F;" >Update</button>';}
+                else{ echo '<button class="btn" type="submit" name="submit" >Add task</button>';} 
+            ?>
         </div>
 </form>
