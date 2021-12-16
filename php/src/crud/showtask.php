@@ -4,6 +4,13 @@
 include ('deletetask.php');
 include ('edittask.php');
 
+$tasktitle = "";
+$taskdesc = "";
+$type = "";
+//$done = false;
+$id = 0;
+$update = false;
+
 $pdo = require('./dbconnect.php');
 
 $query = 'SELECT * FROM todolist';
@@ -11,12 +18,6 @@ $stmt = $pdo->prepare($query);
 $stmt->execute();
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$tasktitle = "";
-$taskdesc = "";
-$type = "";
-//$done = false;
-$id = 0;
-//$update = false;
 ?>
 
 <table>
