@@ -160,3 +160,58 @@
 </table>
 
 
+<?php
+    $pdo = require_once 'dbconnect.php';
+
+    $tasks = [
+        'tasktitle' => $tasktitle,
+        'type' => $type,
+        'taskdesc' => $taskdesc,
+        'done' => $done,
+    ];
+    
+    $sql = 'UPDATE todolist
+            SET tasktitle=:tasktitle, type=:type, taskdesc=:taskdesc, done=:done 
+            WHERE id=$id'; 
+            
+    $stmt = $pdo->prepare($sql);
+    
+    $stmt->bindParam(':id', $id['id'], PDO::PARAM_INT);
+    $stmt->bindParam(':tasktitle', $tasks['tasktitle']);
+    $stmt->bindParam(':type', $tasks['type']);
+    $stmt->bindParam(':taskdesc', $tasks['taskdesc']);
+    $stmt->bindParam(':done', $tasks['done']);
+    
+    if ($stmt->execute()) {
+        echo 'The task has been updated successfully!';
+    }
+    
+
+
+?>
+
+<form action="edittask.php" method="POST" class="input_form">
+        <div class="form_group">
+                <label for="text">Task:</label>
+                    <input type="text" name="tasktitle" value="<?php echo $tasktitle ?>" class="form_task">
+        </div>
+        <div class="form_group">
+            <label for="">Choose a type:</label>
+                <select name="type" value="<?php echo $type; ?>" id="type" class="form_control">
+                    <option value="">-Select type-</option>
+                    <option value="home">Home</option>
+                    <option value="work">Work</option>
+                    <option value="leisure">Leisure</option>
+                    <option value="family">Family</option>
+                </select>
+        </div>
+        <div class="form_group">
+            <label for="textarea">Description:</label>
+                <textarea name="taskdesc" value="<?php echo $taskdesc; ?>" class="textarea" rows="4" cols="50">
+                </textarea>
+        </div>
+        <div class="form_group">
+            <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>"
+            <input type="submit" name="update" value="Update" class="btn" style="background: #556B2F;">Update</button>
+        </div>
+</form>
