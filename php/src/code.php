@@ -3,9 +3,9 @@
 $tasktitle = "";
 $taskdesc = "";
 $type = "";
-$done = false;
+//$done = false;
 $id = 0;
-$update = false;
+//$update = false;
 
 if (isset($_POST['submit'])) {
 
@@ -24,6 +24,41 @@ if (isset($_POST['submit'])) {
         exit();
     
 }
+?>
+<?php
+
+if (isset($_GET['id'])) {
+
+    require('dbconnect.php');
+
+    $id = $_GET['id'];
+
+    class Task{
+        
+        private $tasktitle;
+        private $type;
+        private $taskdesc;
+
+    }
+    
+    $sql = "SELECT id, tasktitle, type, taskdesc FROM todolist WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $stmt->setFetchMode(PDO::FETCH_CLASS);
+    $result = $stmt->fetch();
+    while($result)
+    {
+        $tasktitle = $result['tasktitle'];
+        $type = $result['type'];
+        $taskdesc = $result['taskdesc'];
+    };
+
+    //unset($stmt);
+}
+?>
+
+
+
 
 
 

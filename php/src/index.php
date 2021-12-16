@@ -2,7 +2,7 @@
     //session_start();
     include('header.php');
     include('footer.php');
-    include('code.php')
+    //include('code.php')
     
 ?>
 <div class="form">
