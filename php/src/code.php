@@ -57,6 +57,41 @@ if (isset($_POST['update'])){
 
     }
 }
+?>
+<?php
+
+if (isset($_GET['id'])) {
+
+    require('dbconnect.php');
+
+    $id = $_GET['id'];
+
+    class Task{
+        
+        private $tasktitle;
+        private $type;
+        private $taskdesc;
+
+    }
+    
+    $sql = "SELECT id, tasktitle, type, taskdesc FROM todolist WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $stmt->setFetchMode(PDO::FETCH_CLASS);
+    $result = $stmt->fetch();
+    while($result)
+    {
+        $tasktitle = $result['tasktitle'];
+        $type = $result['type'];
+        $taskdesc = $result['taskdesc'];
+    };
+
+    //unset($stmt);
+}
+?>
+
+
+
 
 
 ?>

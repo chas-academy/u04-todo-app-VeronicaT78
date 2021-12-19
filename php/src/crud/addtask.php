@@ -1,3 +1,26 @@
+<?php
+
+if (isset($_GET['id'])) {
+
+    require('dbconnect.php');
+
+    $id = $_GET['id'];
+
+    $tasktitle = "";
+    $taskdesc = "";
+    $type = "";
+    
+    $sql = "SELECT tasktitle, type, taskdesc FROM todolist WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id, '']);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    var_dump($result);
+    //unset($stmt);
+}
+?>
+
+
 <form action="./code.php" method="POST" class="input_form">
         <div class="form_group">
             <?php if (isset($errors)) { ?>
