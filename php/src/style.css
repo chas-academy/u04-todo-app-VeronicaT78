@@ -101,7 +101,7 @@ tr:hover {
 
 input[type=checkbox] {
     position: relative;
-    float: right;
+    float: left;
     cursor: pointer;
     width: 20px;
     height: 20px;
