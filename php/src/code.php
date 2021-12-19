@@ -1,100 +1,57 @@
 <?php
 
-$tasktitle = "";
-$taskdesc = "";
-$type = "";
-$id = 0;
+require('dbconnect.php');
 
 if (isset($_POST['submit'])) {
 
-    require('dbconnect.php');
-    
+    $tasktitle = "";
+    $taskdesc = "";
+    $id = 0;
+    $update = false;
+
     $tasktitle = $_POST['tasktitle'];
     $taskdesc = $_POST['taskdesc'];
-    $type = $_POST['type'];
   
-        $sql = "INSERT INTO todolist (tasktitle, taskdesc, type) VALUES ( :tasktitle, :taskdesc, :type)";
+        $sql = "INSERT INTO todolist (tasktitle, taskdesc) VALUES ( :tasktitle, :taskdesc)";
         $stmt= $pdo->prepare($sql);
-        $stmt->execute(['tasktitle' =>$tasktitle, 'taskdesc'=>$taskdesc, 'type'=>$type]);
+        $stmt->execute(['tasktitle' =>$tasktitle, 'taskdesc'=>$taskdesc]);
         header('location: index.php');
-        
+
         $pdo = null;
         exit();
     
-} 
+};
 
-if (isset($_POST['update'])){
-    
-    $id = isset($_GET['id']) ? $_GET['id'] : null;{
-    
-    require('dbconnect.php');
-    
-   //$id = interval($_GET['id']);
-    //echo ($id);
+if (isset($_POST['update'])) {
 
+	$id = $_POST['id'];
     $tasktitle = $_POST['tasktitle'];
-    $taskdesc = $_POST['taskdesc'];
-    $type = $_POST['type'];
-
-    $sql = 'UPDATE todolist
-        SET tasktitle=:tasktitle, type=:type, taskdesc=:taskdesc
-        WHERE id = :id'; 
-        
-    $stmt = $pdo->prepare($sql);
-
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':tasktitle', $tasktitle);
-    $stmt->bindParam(':type', $type);
-    $stmt->bindParam(':taskdesc', $taskdesc);
-    $result= $stmt->execute();
-
-    var_dump($result);
-
-    //header('location: index.php');
+	$taskdesc= $_POST['taskdesc'];
     
+    $sql = "UPDATE todolist SET tasktitle=?, taskdesc=? WHERE id=?"; 
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute([$tasktitle, $taskdesc, $id]);
+    header('location: index.php');
+
     $pdo = null;
     exit();
+};
 
-    }
-}
-?>
-<?php
+if (isset($_GET['del'])) {
+	
+    $id = $_GET['del'];
 
-if (isset($_GET['id'])) {
+    $sql = "DELETE FROM todolist WHERE id=$id"; 
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute();
+    header('location: index.php');
 
-    require('dbconnect.php');
-
-    $id = $_GET['id'];
-
-    class Task{
-        
-        private $tasktitle;
-        private $type;
-        private $taskdesc;
-
-    }
-    
-    $sql = "SELECT id, tasktitle, type, taskdesc FROM todolist WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':id' => $id]);
-    $stmt->setFetchMode(PDO::FETCH_CLASS);
-    $result = $stmt->fetch();
-    while($result)
-    {
-        $tasktitle = $result['tasktitle'];
-        $type = $result['type'];
-        $taskdesc = $result['taskdesc'];
-    };
-
-    //unset($stmt);
-}
-?>
-
-
-
-
+    $pdo = null;
+    exit();
+};
 
 ?>
+
 
 
 
