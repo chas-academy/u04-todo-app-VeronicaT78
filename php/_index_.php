@@ -160,3 +160,7 @@
 </table>
 
 
+<!-- <td><?php echo '<form action="" method="POST">
+			<input type="hidden" name="id" value='.$task["id"].'>
+			<input type="submit" class="edit_btn" name="edit" value="Edit"></form>'; ?>
+			</td> -->

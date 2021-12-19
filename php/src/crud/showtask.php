@@ -2,6 +2,7 @@
 
 include ('./code.php');
 include ('deletetask.php');
+include ('edittask.php');
 
 $pdo = require('./dbconnect.php');
 
@@ -13,9 +14,8 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $tasktitle = "";
 $taskdesc = "";
 $type = "";
-$done = false;
 $id = 0;
-$update = false;
+
 ?>
 
 <table>
@@ -35,6 +35,8 @@ $update = false;
 			<td><?php echo $task['tasktitle']; ?></td>
 			<td><?php echo $task['type']; ?></td>
             <td><?php echo $task['taskdesc']; ?></td>
+			<td><a href="index.php?id=<?php echo $task['id']; ?>" class="edit_btn">Edit</a></td> 
+			
 			<td><?php echo '<form action="" method="POST">
 			<input type="hidden" name="id" value='.$task["id"].'>
 			<input type="submit" class="del_btn" name="delete" value="Delete"></form>'; ?>

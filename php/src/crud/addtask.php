@@ -4,14 +4,14 @@
                 <p><?php echo $errors; ?></p>
             <?php } ?>
                 <label for="text">Task:</label>
-                    <input type="text" value="<?php echo $tasktitle; ?>" name="tasktitle" class="form_task">
+                    <input type="text" value="<?php if(isset($_GET['id'])){ echo $edittasks['tasktitle']; } ?>" name="tasktitle" class="form_task">
         </div>
         <div class="form_group">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
         </div>
         <div class="form_group">
             <label for="">Choose a type:</label>
-                <select name="type" value="<?php echo $type; ?>" id="type" class="form_control">
+                <select name="type" value="<?php if(isset($_GET['id'])){ echo $edittasks['type']; } ?>" id="type" class="form_control">
                     <option value="">-Select type-</option>
                     <option value="home">Home</option>
                     <option value="work">Work</option>
@@ -21,10 +21,13 @@
         </div>
         <div class="form_group">
             <label for="textarea">Description:</label>
-                <textarea name="taskdesc" value="<?php echo $taskdesc; ?>" class="textarea" rows="4" cols="50">
+                <textarea name="taskdesc" value="<?php if(isset($_GET['id'])){ echo $edittasks['taskdesc']; } ?>" class="textarea" rows="4" cols="50">
                 </textarea>
         </div>
         <div class="form_group">
-            <button class="btn" type="submit" name="submit" >Add task</button>   
+            <?php if(isset($_GET['id'])){ echo '<button class="btn" type="submit" name="update" style="background: #556B2F;" >Update</button>';}
+                else{ echo '<button class="btn" type="submit" name="submit" >Add task</button>';} 
+            ?>
+            <!-- <button class="btn" type="submit" name="submit" >Add task</button>    -->
         </div>
 </form>
