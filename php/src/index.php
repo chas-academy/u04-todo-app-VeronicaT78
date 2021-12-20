@@ -60,8 +60,9 @@
 			</td>
 		</tr>
 	<?php }; ?>
+	
 </table>
-        <?php foreach($record as $record) { ?>
+        <?php if(isset($_GET['edit'])){ foreach($record as $record) { ?>
     <div class="form">
 	    <form method="post" action="code.php" >
 		    <div class="input-group">
@@ -78,6 +79,7 @@
 	        </div>
 	    </form>
         <?php }; ?>
+		<?php }; ?>
     </div>
     <div class="form">
 	    <form method="post" action="code.php" >
